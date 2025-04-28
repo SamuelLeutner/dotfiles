@@ -52,3 +52,14 @@
      # Ctrl + a and after press I 
      C-a I
 ```
+
+### Enter nvim and quit to reload settings
+```bash
+    nvim
+    # :q!
+```
+
+### Have a fun :)
+```bash
+    nvim
+```
