@@ -1,8 +1,9 @@
 # Dotfiles
 
 ## My Setup
-- [Warp Terminal](https://app.warp.dev/referral/2WQQZR)
+- [Alacritty](https://github.com/alacritty/alacritty/)
 - [Crkbd by @tupinikeebs](https://tupinikeebs.com/)
+- [Miryoku Keyboard Layout](https://github.com/manna-harbour/miryoku)
 
 ## Features
 - [fzf](https://github.com/junegunn/fzf)

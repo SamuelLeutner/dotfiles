@@ -1,3 +1,14 @@
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+  tmux attach || tmux new
+fi
+
+function fish_user_key_bindings
+    fzf --fish | source
+end
+
+# Zoxide initialization
+zoxide init fish | source
+
 # Git Aliases
 alias g='git'
 alias ga='git add'
@@ -32,3 +43,6 @@ alias ls='eza --icons --all'
 alias cat='bat --style=full --paging=always'
 
 starship init fish | source
+set -x TMUX_CONFIG "$HOME/.tmux.conf"
+set -x FISH_CONFIG "$HOME/.config/fish/config.fish"
+
