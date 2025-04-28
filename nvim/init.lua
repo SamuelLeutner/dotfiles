@@ -117,39 +117,57 @@ vim.opt.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
+local is_wsl = vim.fn.has 'wsl' == 1
+local is_linux = vim.fn.has 'unix' == 1 and not is_wsl
+
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
-end)
 
-if vim.env.WSL_DISTRO_NAME then
-  vim.g.clipboard = {
-    name = 'wsl_clipboard',
-    copy = {
-      ['+'] = 'clip.exe',
-      ['*'] = 'clip.exe',
-    },
-    paste = {
-      ['+'] = 'powershell.exe -command Get-Clipboard',
-      ['*'] = 'powershell.exe -command Get-Clipboard',
-    },
-    cache_enabled = 0,
-  }
-elseif vim.env.TMUX then
-  vim.g.clipboard = {
-    name = 'tmux_clipboard',
-    copy = {
-      ['+'] = { 'tmux', 'set-buffer', '-' },
-      ['*'] = { 'tmux', 'set-buffer', '-' },
-    },
-    paste = {
-      ['+'] = { 'tmux', 'save-buffer', '-' },
-      ['*'] = { 'tmux', 'save-buffer', '-' },
-    },
-    cache_enabled = 1,
-  }
-else
-  vim.opt.clipboard = 'unnamedplus'
-end
+  if is_wsl then
+    vim.g.clipboard = {
+      name = 'win32yank',
+      copy = {
+        ['+'] = 'win32yank.exe -i --crlf',
+        ['*'] = 'win32yank.exe -i --crlf',
+      },
+      paste = {
+        ['+'] = 'win32yank.exe -o --lf',
+        ['*'] = 'win32yank.exe -o --lf',
+      },
+      cache_enabled = true,
+    }
+  elseif is_linux then
+    local wayland = os.getenv 'WAYLAND_DISPLAY' ~= nil
+
+    if wayland then
+      vim.g.clipboard = {
+        name = 'wl-clipboard',
+        copy = {
+          ['+'] = 'wl-copy',
+          ['*'] = 'wl-copy',
+        },
+        paste = {
+          ['+'] = 'wl-paste',
+          ['*'] = 'wl-paste',
+        },
+        cache_enabled = true,
+      }
+    else
+      vim.g.clipboard = {
+        name = 'xclip',
+        copy = {
+          ['+'] = 'xclip -selection clipboard',
+          ['*'] = 'xclip -selection clipboard',
+        },
+        paste = {
+          ['+'] = 'xclip -selection clipboard -o',
+          ['*'] = 'xclip -selection clipboard -o',
+        },
+        cache_enabled = true,
+      }
+    end
+  end
+end)
 
 -- Enable break indent
 vim.opt.breakindent = true
