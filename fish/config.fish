@@ -1,6 +1,6 @@
 if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
   tmux attach || tmux new
-fi
+end
 
 function fish_user_key_bindings
     fzf --fish | source
@@ -45,4 +45,9 @@ alias cat='bat --style=full --paging=always'
 starship init fish | source
 set -x TMUX_CONFIG "$HOME/.tmux.conf"
 set -x FISH_CONFIG "$HOME/.config/fish/config.fish"
+
+set -x RABBITMQ_USER "admin"
+set -x RABBITMQ_PASSWORD "admin"
+
+alias idea="LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 intellij-idea-ultimate-edition"
 
