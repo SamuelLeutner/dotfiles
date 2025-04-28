@@ -1,0 +1,21 @@
+[general]
+
+import = [
+   "~/.config/alacritty/themes/themes/tokyo_night_enhanced.toml"
+]
+
+[window]
+
+opacity = 0.9
+padding.x = 10
+padding.y = 10
+decorations = "Full"
+
+[font]
+
+normal.family = "JetBrainsMono Nerd Font"
+bold.family = "JetBrainsMono Nerd Font"
+italic.family = "JetBrainsMono Nerd Font"
+bold_italic.family = "JetBrainsMono Nerd Font"
+
+size = 14.0
