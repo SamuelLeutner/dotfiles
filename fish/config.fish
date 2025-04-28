@@ -1,5 +1,7 @@
-if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-  tmux attach || tmux new
+if command -v tmux >/dev/null
+    if not set -q TMUX
+        tmux attach; or tmux new
+    end
 end
 
 function fish_user_key_bindings
@@ -14,19 +16,23 @@ alias g='git'
 alias ga='git add'
 alias gaa='git add --all'
 alias gc='git commit -v'
+
 alias gca='git commit -v -a'
 alias gcm='git commit -m'
 alias gcma='git commit --amend'
 alias gco='git checkout'
+
 alias gd='git diff'
 alias gl='git pull'
 alias gp='git push'
 alias gst='git status'
 alias gsb='git status -sb'
+
 alias glog='git log --oneline --decorate --graph'
 
 # Docker Aliases
 alias d='docker'
+
 alias dc='docker compose'
 alias dcu='docker compose up'
 alias dcd='docker compose down'
@@ -45,9 +51,4 @@ alias cat='bat --style=full --paging=always'
 starship init fish | source
 set -x TMUX_CONFIG "$HOME/.tmux.conf"
 set -x FISH_CONFIG "$HOME/.config/fish/config.fish"
-
-set -x RABBITMQ_USER "admin"
-set -x RABBITMQ_PASSWORD "admin"
-
-alias idea="LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 intellij-idea-ultimate-edition"
 
