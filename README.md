@@ -1,23 +1,9 @@
 # Dotfiles
 
-## My Setup
-- [Alacritty](https://github.com/alacritty/alacritty/)
-- [Crkbd by @tupinikeebs](https://tupinikeebs.com/)
-- [Miryoku Keyboard Layout](https://github.com/manna-harbour/miryoku)
-
-## Features
-- [fzf](https://github.com/junegunn/fzf)
-- [eza](https://github.com/eza-community/eza/blob/main/INSTALL.md)
-- [bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation)
-- [zoxide](https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#installation)
-- [starship](https://starship.rs/guide/#%F0%9F%9A%80-installation)
-- [Some Nerd Font](https://www.nerdfonts.com/font-downloads)
-
 ## Requirements
 - [tmux](https://github.com/tmux/tmux/wiki)
 - [tpm](https://github.com/tmux-plugins/tpm)
 - [nvim](https://github.com/neovim/neovim/blob/master/INSTALL.md)
-- [Fish Shell](https://github.com/fish-shell/fish-shell/?tab=readme-ov-file#getting-fish)
 
 ## Instalation
 

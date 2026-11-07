@@ -88,8 +88,6 @@ P.S. You can delete this when you're done too. It's your config now! :)
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
 
-require 'keymaps.remap'
-
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -115,58 +113,11 @@ vim.opt.showmode = false
 
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
+--  Neovim detects the provider (wl-clipboard, xclip, win32yank) on its own.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-local is_wsl = vim.fn.has 'wsl' == 1
-local is_linux = vim.fn.has 'unix' == 1 and not is_wsl
-
 vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
-
-  if is_wsl then
-    vim.g.clipboard = {
-      name = 'win32yank',
-      copy = {
-        ['+'] = 'win32yank.exe -i --crlf',
-        ['*'] = 'win32yank.exe -i --crlf',
-      },
-      paste = {
-        ['+'] = 'win32yank.exe -o --lf',
-        ['*'] = 'win32yank.exe -o --lf',
-      },
-      cache_enabled = true,
-    }
-  elseif is_linux then
-    local wayland = os.getenv 'WAYLAND_DISPLAY' ~= nil
-
-    if wayland then
-      vim.g.clipboard = {
-        name = 'wl-clipboard',
-        copy = {
-          ['+'] = 'wl-copy',
-          ['*'] = 'wl-copy',
-        },
-        paste = {
-          ['+'] = 'wl-paste',
-          ['*'] = 'wl-paste',
-        },
-        cache_enabled = true,
-      }
-    else
-      vim.g.clipboard = {
-        name = 'xclip',
-        copy = {
-          ['+'] = 'xclip -selection clipboard',
-          ['*'] = 'xclip -selection clipboard',
-        },
-        paste = {
-          ['+'] = 'xclip -selection clipboard -o',
-          ['*'] = 'xclip -selection clipboard -o',
-        },
-        cache_enabled = true,
-      }
-    end
-  end
 end)
 
 -- Enable break indent
